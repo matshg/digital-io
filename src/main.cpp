@@ -49,11 +49,38 @@ void loop() {
     int sensorVal = analogRead(sensorPin);
 
     //Serial.println('Value: ');
-    Serial.println(sensorVal);
+
+
+    char LED[3] = {LED0, LED1, LED2};
 
     // convert the ADC reading to voltavge
     //float voltage = (sensorVal/1024) * 5.0;
 
+while (!(PINB & BTN0))
+{
+  for (int i = 0; i < 3; i++){
+    if (!(PINB & BTN0)){
+      PORTB |= LED[i];
+      sensorVal = analogRead(sensorPin);
+      delay(sensorVal);
+      Serial.println(sensorVal);
+      }
+    }
+  for (int z = 2; z>= 0; z--){
+    if(!(PINB & BTN0)){
+      PORTB &= ~LED[z];
+      sensorVal = analogRead(sensorPin);
+      delay(sensorVal);
+      Serial.println(sensorVal);
+      }
+    }
+
+} // END WHILE loop
+
+Serial.println("Button not pressed");
+PORTB &= ~PIN_LEDS;
+
+/*
     if (!(PINB & BTN0)) { //Turn the LED on if BTN0 is pressed
       PORTB |= LED0;
     if (!(PINB & BTN0))
@@ -77,8 +104,7 @@ void loop() {
       PORTB &= ~LED0;
     if (!(PINB & BTN0))
       delay(sensorVal);
-    else ()
     }
-
+*/
     //delay(100);
 }
