@@ -78,7 +78,7 @@ while (!(PINB & BTN0))
 } // END WHILE loop
 
 Serial.println("Button not pressed");
-PORTB &= ~PIN_LEDS;
+PORTB &= ~PIN_LEDS; //LEDs off
 
 /*
     if (!(PINB & BTN0)) { //Turn the LED on if BTN0 is pressed
